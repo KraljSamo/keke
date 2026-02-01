@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LENART</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f700e1;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .bouncing-element {
+            position: absolute;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .static-element {
+            position: absolute;
+            z-index: 5;
+        }
+
+        #component5 {
+            width: 320px;
+            height: auto;
+        }
+
+        #component6 {
+            width: 90px;
+            height: auto;
+        }
+
+        #component7 {
+            width: 450px;
+            height: auto;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #component8 {
+            width: 80px;
+            height: auto;
+        }
+
+        #component9 {
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            z-index: 100;
+        }
+
+        .nav-links {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 20;
+            left: 50%;
+            top: 55%;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a {
+            display: block;
+            text-decoration: none;
+        }
+
+        .nav-links img {
+            width: 180px;
+            height: auto;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-links a:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (min-width: 769px) {
+            #component5 {
+                width: 380px;
+            }
+
+            #component6 {
+                width: 110px;
+            }
+
+            #component7 {
+                width: 500px;
+                /* right: 180px; */
+                right: 10%;
+                top: 55%;
+            }
+
+            #component8 {
+                width: 100px;
+            }
+
+            #component9 {
+                width: 140px;
+                top: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .nav-links {
+                left: auto;
+                right: 15%;
+                top: 60%;
+                gap: 8px;
+            }
+
+            .nav-links img {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #component5 {
+                width: 65vw;
+                max-width: 280px;
+            }
+
+            #component6 {
+                width: 80px;
+            }
+
+            #component7 {
+                width: 320px;
+                right: 5%;
+                top: auto;
+                bottom: 5%;
+                transform: none;
+            }
+
+            #component8 {
+                width: 70px;
+            }
+
+            #component9 {
+                width: 90px;
+                top: 15px;
+                left: 15px;
+                transform: none;
+            }
+
+            .nav-links {
+                right: 30%;
+                left: auto;
+                top: auto;
+                bottom: 20%;
+                transform: none;
+                gap: 0;
+            }
+
+            .nav-links img {
+                height: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="component9" class="static-element" src="keke_component-09-trimmed.svg" alt="STEMS">
+
+        <img id="component7" class="static-element" src="keke_component-07-trimmed.svg" alt="Chain">
+
+        <div class="nav-links static-element">
+            <a href="#"><img class="nav-links-img" src="keke_component-10-trimmed.svg" alt="SOUNDCLOUD"></a>
+            <a href="#"><img class="nav-links-img" src="keke_component-11-trimmed.svg" alt="BANDCAMP"></a>
+            <a href="#"><img class="nav-links-img" src="keke_component-12-trimmed.svg" alt="INSTAGRAM"></a>
+            <a href="#"><img class="nav-links-img" src="keke_component-13-trimmed.svg" alt="SHOP"></a>
+        </div>
+
+        <img id="component5" class="bouncing-element" src="keke_component-05-trimmed.svg" alt="Circle">
+        <img id="component6" class="bouncing-element" src="keke_component-06-trimmed.svg" alt="Hand">
+        <img id="component8" class="bouncing-element" src="keke_component-08-trimmed.svg" alt="HETE">
+    </div>
+
+    <script>
+        class BouncingElement {
+            constructor(element, speedMultiplier = 1) {
+                this.element = element;
+                this.x = Math.random() * (window.innerWidth - element.offsetWidth);
+                this.y = Math.random() * (window.innerHeight - element.offsetHeight);
+                this.vx = (Math.random() > 0.5 ? 1 : -1) * (1.5 + Math.random()) * speedMultiplier;
+                this.vy = (Math.random() > 0.5 ? 1 : -1) * (1.5 + Math.random()) * speedMultiplier;
+                this.element.style.left = this.x + 'px';
+                this.element.style.top = this.y + 'px';
+            }
+
+            update() {
+                const maxX = window.innerWidth - this.element.offsetWidth;
+                const maxY = window.innerHeight - this.element.offsetHeight;
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x <= 0 || this.x >= maxX) {
+                    this.vx *= -1;
+                    this.x = Math.max(0, Math.min(this.x, maxX));
+                }
+
+                if (this.y <= 0 || this.y >= maxY) {
+                    this.vy *= -1;
+                    this.y = Math.max(0, Math.min(this.y, maxY));
+                }
+
+                this.element.style.left = this.x + 'px';
+                this.element.style.top = this.y + 'px';
+            }
+        }
+
+        let bouncingElements = [];
+
+        function initBouncingElements() {
+            const component5 = document.getElementById('component5');
+            const component6 = document.getElementById('component6');
+            const component8 = document.getElementById('component8');
+
+            bouncingElements = [
+                new BouncingElement(component5, 1.0),
+                new BouncingElement(component6, 1.2),
+                new BouncingElement(component8, 0.8)
+            ];
+        }
+
+        function animate() {
+            bouncingElements.forEach(el => el.update());
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                initBouncingElements();
+                animate();
+            }, 100);
+        });
+
+        window.addEventListener('resize', () => {
+            bouncingElements.forEach(el => {
+                const maxX = window.innerWidth - el.element.offsetWidth;
+                const maxY = window.innerHeight - el.element.offsetHeight;
+                el.x = Math.min(el.x, maxX);
+                el.y = Math.min(el.y, maxY);
+            });
+        });
+    </script>
+</body>
+</html>
