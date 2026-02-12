@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LENART</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,6 +19,7 @@
             height: 100%;
             overflow: hidden;
             background-color: #f700e1;
+            font-family: 'Archivo Black', sans-serif;
         }
 
         .container {
@@ -60,19 +64,23 @@
             height: auto;
         }
 
-        #component9 {
+        #stems-text {
+            position: absolute;
             top: 25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
             z-index: 100;
+            color: #fff;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
         }
 
         .nav-links {
             position: absolute;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 0;
             z-index: 20;
             left: 50%;
             top: 55%;
@@ -82,16 +90,15 @@
         .nav-links a {
             display: block;
             text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            text-transform: uppercase;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
-        .nav-links img {
-            width: 180px;
-            height: auto;
-            transition: transform 0.2s ease;
-        }
-
-        .nav-links a:hover img {
+        .nav-links a:hover {
             transform: scale(1.05);
+            opacity: 0.8;
         }
 
         @media (min-width: 769px) {
@@ -113,8 +120,8 @@
                 width: 280px;
             }
 
-            #component9 {
-                width: 140px;
+            #stems-text {
+                font-size: 26px;
                 top: 30px;
                 left: 50%;
                 transform: translateX(-50%);
@@ -124,11 +131,11 @@
                 left: auto;
                 right: 15%;
                 top: 60%;
-                gap: 8px;
+                gap: 2px;
             }
 
-            .nav-links img {
-                width: 200px;
+            .nav-links a {
+                font-size: 20px;
             }
         }
 
@@ -155,8 +162,8 @@
                 height: auto;
             }
 
-            #component9 {
-                width: 90px;
+            #stems-text {
+                font-size: 16px;
                 top: 15px;
                 left: 15px;
                 transform: none;
@@ -168,26 +175,27 @@
                 top: auto;
                 bottom: 20%;
                 transform: none;
-                gap: 0;
+                gap: 2px;
             }
 
-            .nav-links img {
-                height: 20px;
+            .nav-links a {
+                font-size: 16px;
+                letter-spacing: 2px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img id="component9" class="static-element" src="keke_component-09-trimmed.svg" alt="STEMS">
+        <div id="stems-text">STEMS</div>
 
         <img id="component7" class="static-element" src="keke_component-07-trimmed.svg" alt="Chain">
 
         <div class="nav-links static-element">
-            <a href="#"><img class="nav-links-img" src="keke_component-10-trimmed.svg" alt="SOUNDCLOUD"></a>
-            <a href="#"><img class="nav-links-img" src="keke_component-11-trimmed.svg" alt="BANDCAMP"></a>
-            <a href="#"><img class="nav-links-img" src="keke_component-12-trimmed.svg" alt="INSTAGRAM"></a>
-            <a href="#"><img class="nav-links-img" src="keke_component-13-trimmed.svg" alt="SHOP"></a>
+            <a href="#">STEMS</a>
+            <a href="#">BANDCAMP</a>
+            <a href="#">SOUNDCLOUD</a>
+            <a href="#">MERCH</a>
         </div>
 
         <img id="component5" class="bouncing-element" src="keke_component-05-trimmed.svg" alt="Circle">
